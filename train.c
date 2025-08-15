@@ -31,7 +31,8 @@ void enqueue(){
     else{
         rear=(rear+1)%size;
         printf("Enter Name and tickets count");
-        scanf(" %[^\n]%d",queue[rear].name,&queue[rear].ticketsleft);
+        scanf(" %[^\n]",queue[rear].name);
+        scanf("%d",&queue[rear].ticketsleft);
         printf("Successfully added...");
         count++;
     }
@@ -53,7 +54,11 @@ void dequeue(){
     }
 }
 int serve(){
-    if(queue[front].ticketsleft!=0){
+    if(front==-1){
+        printf("No customer to serve..");
+        return;
+    }
+    else if(queue[front].ticketsleft!=0){
         (queue[front].ticketsleft)--;
             if((queue[front].ticketsleft)==0){
                 dequeue();
@@ -69,6 +74,7 @@ int serve(){
     
     else{
         dequeue();
+        return 0;
     }
 
 }
@@ -89,17 +95,21 @@ void main(){
                 serve();
                 break;
             case 3: 
-                printf("%s || %d \n",queue[rear].name,queue[rear].ticketsleft);
+                printf("%s || %d \n",queue[front].name,queue[front].ticketsleft);
                 break;
             case 4:
                 printf("Customers waiting : %d \n",count);
                 break;
             case 5:
-            
-                for(i=front;i!=rear;i=(i+1)%size)
-                {   printf("name : %s || forms left :%d \n",queue[i].name,queue[i].ticketsleft);
+                if(front==-1){
+                    printf("No customers in queue..");
                 }
-                printf("name : %s || forms left :%d \n",queue[i].name,queue[i].ticketsleft);
+                else{
+                    for(i=front;i!=rear;i=(i+1)%size)
+                    {   printf("name : %s || forms left :%d \n",queue[i].name,queue[i].ticketsleft);
+                    }
+                    printf("names : %s || forms left :%d \n",queue[i].name,queue[i].ticketsleft);
+                }
         }
             
 

@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <string.h>
 
 struct teachers{
 	char name[50];
@@ -9,6 +9,7 @@ struct teachers{
 
 }queue[50],teacher[50],tempname;
 int front =-1,rear=-1;
+char searchbook[50];
 
 
 
@@ -80,15 +81,23 @@ void main(){
 
             case 2:
                 printf("Enter book name : ");
-                scanf(" %[^\n]",tempname.book);
+                char searchbook[50];
+                scanf(" %[^\n]",searchbook);
                 i=0;
                 int waittime=0;
-                while(tempname.book==queue[i].book)
+                
+                while(i<n && strcasecmp(searchbook,queue[i].book) )
                 {   
-                    waittime+=tempname.pages*2;
+                    waittime=waittime+ queue[i].pages*2;
                     i++;
                 }
-                printf("Waiting time of %s is %d \n",tempname.book,waittime);
+                if(i==n){
+                    printf("Book not found..");
+
+                }
+                else{
+                    printf("Waiting time for book %s is %d seconds..",queue[i].book,waittime);
+                }
                 break;
             
                 
